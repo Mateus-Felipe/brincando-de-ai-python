@@ -2,7 +2,7 @@ import transformers
 from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 import torch
 
-model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
+model_id = "facebook/opt-125m"
 
 quantization_config = BitsAndBytesConfig(load_in_8bit=True)
 tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -15,7 +15,7 @@ pipe = pipeline(
     tokenizer=tokenizer,
     # model_kwargs={
     #   "torch_dtype": torch.bfloat16,
-    #   "quantization_config": quantization_config
+        # "quantization_config": quantization_config
     # },
     device_map="auto"
 )
@@ -25,10 +25,10 @@ chat = [
     {"role": "user", "content": "Tell me how to create a AI with hugging face and python. give me a short code to do that."}
 ]
 
-response = pipe(chat, max_new_tokens=100)
+print(pipe(chat, max_new_tokens=100))
 # pipe("Hey how are you doing today?")
 
-
+    
 # tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B")
 # model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B")
 
