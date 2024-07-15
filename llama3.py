@@ -2,7 +2,7 @@ import transformers
 from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 import torch
 
-model_id = "meta-llama/Meta-Llama-3-8B"
+model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
 
 quantization_config = BitsAndBytesConfig(load_in_8bit=True)
 tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -13,10 +13,10 @@ pipe = pipeline(
     "text-generation",
     model=model,
     tokenizer=tokenizer,
-    # model_kwargs={
-    #   "torch_dtype": torch.bfloat16,
-        # "quantization_config": quantization_config
-    # },
+    model_kwargs={
+        "torch_dtype": torch.bfloat16,
+        "quantization_config": quantization_config
+    },
     device_map="auto"
 )
 
