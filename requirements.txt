@@ -16,3 +16,5 @@ langchain-core
 langgraph
 tavily-python
 langchainhub
+llama-cpp-python
+duckduckgo-search
